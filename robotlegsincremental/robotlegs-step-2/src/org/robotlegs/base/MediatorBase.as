@@ -68,16 +68,15 @@ package org.robotlegs.base
 		public function preRegister():void
 		{
 			removed = false;
-			//trace(flexAvailable+" "+(viewComponent is UIComponentClass)+" "+viewComponent['initialized']);
 			if (flexAvailable && (viewComponent is UIComponentClass) && !viewComponent['initialized'])
 			{
-				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.id+" NOT initialized");
+				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.constructor+" NOT initialized");
 				
 				IEventDispatcher(viewComponent).addEventListener('creationComplete', onCreationComplete, false, 0, true);
 			}
 			else
-			{
-				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.id+" initialized");
+			{				
+				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.constructor+" initialized");
 				onRegister();
 			}
 		}
@@ -152,7 +151,7 @@ package org.robotlegs.base
 		 */
 		protected function onCreationComplete(e:Event):void
 		{
-			trace("[RL  ] [MediatorBase] onCreationComplete(e) "+viewComponent.id);
+			trace("[RL  ] [MediatorBase] onCreationComplete(e) "+viewComponent.constructor);
 			
 			IEventDispatcher(e.target).removeEventListener('creationComplete', onCreationComplete);
 			

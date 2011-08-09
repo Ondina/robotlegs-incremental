@@ -96,7 +96,7 @@ package org.robotlegs.base
 		public function mapView(viewClassOrName:*, mediatorClass:Class, injectViewAs:* = null, autoCreate:Boolean = true, autoRemove:Boolean = true):void
 		{
 			var viewClassName:String = reflector.getFQCN(viewClassOrName);
-			trace("[RL  ] [MediatorMap] mapView() viewClassName "+viewClassName);
+			trace("[RL  ] [MediatorMap] mapView() "+viewClassName);
 			if (mappingConfigByViewClassName[viewClassName] != null)
 				throw new ContextError(ContextError.E_MEDIATORMAP_OVR + ' - ' + mediatorClass);
 			
@@ -134,7 +134,7 @@ package org.robotlegs.base
 			// This was a bad idea - causes unexpected eager instantiation of object graph 						
 			if (autoCreate && contextView && (viewClassName == getQualifiedClassName(contextView) ))
 			{
-				trace("[RL  ] [MediatorMap] mapView() if (autoCreate && contextView)  mapView() "+contextView+" "+mediatorClass+" call  createMediatorUsing");				
+				trace("[RL  ] [MediatorMap] mapView() if (autoCreate && contextView) mapView() "+contextView+" "+mediatorClass);				
 				createMediatorUsing(contextView, viewClassName, config);
 			}
 		}
@@ -160,7 +160,7 @@ package org.robotlegs.base
 		 */
 		public function createMediator(viewComponent:Object):IMediator
 		{
-			trace("[RL  ] [MediatorMap] createMediator() for "+viewComponent.id);			
+			trace("[RL  ] [MediatorMap] createMediator() for "+viewComponent.constructor);			
 			return createMediatorUsing(viewComponent);
 		}
 		
@@ -169,7 +169,7 @@ package org.robotlegs.base
 		 */
 		public function registerMediator(viewComponent:Object, mediator:IMediator):void
 		{
-			trace("[RL  ] [MediatorMap] registerMediator() "+mediator+" for "+viewComponent.id);			
+			trace("[RL  ] [MediatorMap] registerMediator() "+mediator+" for "+viewComponent.constructor);			
 			injector.mapValue(reflector.getClass(mediator), mediator);
 			mediatorByView[viewComponent] = mediator;
 			mappingConfigByView[viewComponent] = mappingConfigByViewClassName[getQualifiedClassName(viewComponent)];
@@ -190,7 +190,7 @@ package org.robotlegs.base
 				mediator.preRemove();
 				mediator.setViewComponent(null);
 				injector.unmap(reflector.getClass(mediator));
-				trace("[RL  ] [MediatorMap] removeMediator() "+viewComponent.id+" "+mediator);
+				trace("[RL  ] [MediatorMap] removeMediator() "+mediator+" for "+viewComponent.constructor);
 			}
 			return mediator;
 		}
@@ -251,7 +251,7 @@ package org.robotlegs.base
 		{
 			if (contextView && enabled)
 			{
-				trace("[RL  ] [MediatorMap] addListeners() if (contextView)  contextView.addEventListener(Event.ADDED_TO_STAGE)");
+				trace("[RL  ] [MediatorMap] addListeners() if (contextView) contextView.addEventListener(Event.ADDED_TO_STAGE)");
 				
 				contextView.addEventListener(Event.ADDED_TO_STAGE, onViewAdded, useCapture, 0, true);
 				contextView.addEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved, useCapture, 0, true);
@@ -274,9 +274,7 @@ package org.robotlegs.base
 		 * @private
 		 */		
 		protected override function onViewAdded(e:Event):void
-		{
-			
-			
+		{						
 			if (mediatorsMarkedForRemoval[e.target])
 			{
 				delete mediatorsMarkedForRemoval[e.target];
@@ -312,7 +310,7 @@ package org.robotlegs.base
 						injector.mapValue(claxx, viewComponent);
 					}
 					mediator = injector.instantiate(config.mediatorClass);
-					trace("[RL  ] [MediatorMap] createMediatorUsing() "+viewComponent.id+ " "+mediator);
+					trace("[RL  ] [MediatorMap] createMediatorUsing() "+viewComponent.constructor+ " "+mediator);
 					for each (var clazz:Class in config.typedViewClasses) 
 					{
 						injector.unmap(clazz);

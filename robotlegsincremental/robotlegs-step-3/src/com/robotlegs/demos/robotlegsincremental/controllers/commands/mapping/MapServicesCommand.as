@@ -1,6 +1,10 @@
 package com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping
 {
     import com.robotlegs.demos.robotlegsincremental.services.SomeService;
+    import com.robotlegs.demos.robotlegsincremental.services.interfaces.ISomeService;
+    import com.robotlegs.demos.robotlegsincremental.utils.ISomeParser;
+    import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
+    
     import org.robotlegs.mvcs.Command;
 
     /**
@@ -13,8 +17,9 @@ package com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping
 
         override public function execute():void
         {
-            trace("[Impl] [Command] MapServicesCommand.execute()");
-            injector.mapSingleton(SomeService);
+            trace("[Impl] [Command] MapServicesCommand.execute()");          
+			injector.mapSingletonOf(ISomeService, SomeService);
+			injector.mapSingletonOf(ISomeParser, SomeParser);
         }
     }
 }

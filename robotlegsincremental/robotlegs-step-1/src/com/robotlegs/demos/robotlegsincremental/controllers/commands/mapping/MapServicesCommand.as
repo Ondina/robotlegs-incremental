@@ -1,20 +1,25 @@
 package com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping
 {
-	import com.robotlegs.demos.robotlegsincremental.services.SomeService;
-	import org.robotlegs.mvcs.Command;
+    import com.robotlegs.demos.robotlegsincremental.services.SomeService;
+    import com.robotlegs.demos.robotlegsincremental.services.interfaces.ISomeService;
+    import com.robotlegs.demos.robotlegsincremental.utils.ISomeParser;
+    import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
+    
+    import org.robotlegs.mvcs.Command;
 
-	/**
-	 *
-	 * @author [Timur] & [Ondina D. F.]
-	 *
-	 */
-	public class MapServicesCommand extends Command
-	{
+    /**
+     *
+     * @author [Timur] & [Ondina D. F.]
+     *
+     */
+    public class MapServicesCommand extends Command
+    {
 
-		override public function execute():void
-		{
-			trace("[Impl] [Command] MapServicesCommand.execute()");
-			injector.mapSingleton(SomeService);
-		}
-	}
+        override public function execute():void
+        {
+            trace("[Impl] [Command] MapServicesCommand.execute()");          
+			injector.mapSingletonOf(ISomeService, SomeService);
+			injector.mapSingletonOf(ISomeParser, SomeParser);
+        }
+    }
 }

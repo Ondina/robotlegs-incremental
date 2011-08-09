@@ -1,6 +1,8 @@
 package com.robotlegs.demos.robotlegsincremental.controllers.commands.service
 {
     import com.robotlegs.demos.robotlegsincremental.services.SomeService;
+    import com.robotlegs.demos.robotlegsincremental.services.interfaces.ISomeService;
+    
     import org.robotlegs.mvcs.Command;
 
     /**
@@ -11,12 +13,12 @@ package com.robotlegs.demos.robotlegsincremental.controllers.commands.service
     public class SomeServiceRequestCommand extends Command
     {
         [Inject]
-        public var someService:SomeService;
+        public var someService:ISomeService;
 
         override public function execute():void
         {
             trace("[Impl] [Command] SomeServiceRequestCommand.execute()");
-            someService.makeServerRequest();
+            someService.accessRessources();
         }
     }
 }

@@ -276,8 +276,7 @@ package org.robotlegs.mvcs
 		 */
 		protected function onAddedToStage(e:Event):void
 		{
-			trace("[RL  ] [Context] onAddedToStage(Event.ADDED_TO_STAGE)");
-			
+			trace("[RL  ] [Context] onAddedToStage(Event.ADDED_TO_STAGE) "+e.target.constructor);			
 			contextView.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			startup();
 		}

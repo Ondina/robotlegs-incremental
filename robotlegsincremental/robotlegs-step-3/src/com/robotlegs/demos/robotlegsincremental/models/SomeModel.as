@@ -1,7 +1,9 @@
 package com.robotlegs.demos.robotlegsincremental.models
 {
     import com.robotlegs.demos.robotlegsincremental.models.events.SomeModelEvent;
+    
     import mx.collections.ArrayCollection;
+    
     import org.robotlegs.mvcs.Actor;
 
     /**
@@ -19,7 +21,7 @@ package com.robotlegs.demos.robotlegsincremental.models
             return _someData;
         }*/
 
-        public function set someData(value:Array):void
+        public function set someData(value:ArrayCollection):void
         {
             trace("[Impl] [Model] SomeModel.set someData(value)");
 
@@ -27,7 +29,7 @@ package com.robotlegs.demos.robotlegsincremental.models
                 var event:SomeModelEvent = new SomeModelEvent(SomeModelEvent.DATA_UPDATED);
                 event.payload = _someData;
                 dispatch(event);*/
-            dispatch(new SomeModelEvent(SomeModelEvent.DATA_UPDATED, new ArrayCollection(value)));
+            dispatch(new SomeModelEvent(SomeModelEvent.DATA_UPDATED, value));
         }
     }
 }

@@ -24,14 +24,6 @@
 			
 			and add the above, otherwise it won't work with the robotlegs src
 			*/
-			/*
-			for the release build you need to go to Project->Properties->Flex Compiler->Additional compiler arguments:
-			
-			-keep-as3-metadata+=Inject
-			-keep-as3-metadata+=PostConstruct
-			
-			and add the above, otherwise it won't work with the robotlegs src
-			*/
 			
 			/**
 			 *
