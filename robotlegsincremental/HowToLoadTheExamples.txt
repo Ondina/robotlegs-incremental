@@ -1,0 +1,27 @@
+1.	flex-no-robotlegs-httprequest - simple URLRequest 
+2.	robotlegs-step-0-A - create project structure 
+3.	robotlegs-step-0-B - create ApplicationContext
+4.	robotlegs-step-0-C - add mediators and map them to views
+5.	robotlegs-service-wrapper - complete app with 2 services and a service wrapper - work in progress
+6.	robotlegs-step-1-A -only ContextView- service call on MAPPING_COMPLETE - o.k. for ContextView
+7.	robotlegs-step-1-B -only ContextView-service call on START_MAPPING-doesn’t work
+8.	robotlegs-step-2 - ContextView + SomeView - service call on MAPPING_COMPLETE - doesn’t work for SomeView
+9.	robotlegs-step-3 ContextView + SomeView - service call on APPLICATION_COMPLETE o.k. for both
+
+
+
+
+
+
+
+
+To load an example ( “robotlegs-step-0-A” ) you have to create a 
+New Flex Project
+Project Name:  robotlegs-step-0-A (or whatever you want it to be)
+Project Location: YourDrive:\YourWebRoot\robotlegs-incremental\robotlegs-step-0-A
+
+Application type: Web
+
+Build Path - Lybrary Path - Merged into code 
+
+Main Application File: ContextView.mxml

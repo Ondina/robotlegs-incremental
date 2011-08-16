@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*"
+               preinitialize="application_preinitializeHandler(event)"
+               initialize="application_initializeHandler(event)"
+               creationComplete="application_creationCompleteHandler(event)"
+               addedToStage="application_addedToStageHandler(event)"
+               updateComplete="application_updateCompleteHandler(event)"
+               applicationComplete="application_applicationCompleteHandler(event)"
+               name="ContextView">
+    <fx:Script>
+        <![CDATA[
+           import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
+           
+           import mx.collections.ArrayCollection;
+           import mx.events.FlexEvent;
+
+            protected static const DEMO_NUMBER:String="Without Robotlegs";
+            protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex Application";
+
+ 
+            public function setListDataProvider(dataProvider:ArrayCollection):void
+            {
+                trace("[Flex] ContextView.setListDataProvider(dataProvider) <<<<<<<<<<<<<<<<<");
+                contextViewList.dataProvider=dataProvider;
+            }
+
+            //////////////////////////////////////
+            public function accessResources():void
+            {
+
+                trace("[Flex] ContextView.accessResources() urlLoader.addEventListener(Event.COMPLETE, onDataReceived);");
+                var url:String="http://localhost/robotlegs-incremental/flex-no-robotlegs-urlrequest/resources/xml/SomeXML.xml";
+                var urlRequest:URLRequest=new URLRequest(url);
+                var urlLoader:URLLoader=new URLLoader();
+
+                urlLoader.dataFormat=URLLoaderDataFormat.TEXT;
+                urlLoader.addEventListener(Event.COMPLETE, onDataReceived);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, onDataError);
+                urlLoader.addEventListener(IOErrorEvent.NETWORK_ERROR, onDataError);
+                urlLoader.addEventListener(IOErrorEvent.VERIFY_ERROR, onDataError);
+                urlLoader.addEventListener(IOErrorEvent.DISK_ERROR, onDataError);
+                urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+
+                urlLoader.load(urlRequest);
+            }
+
+            protected function application_preinitializeHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");	
+            }
+
+            protected function application_initializeHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
+            }
+
+            protected function application_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE");
+                accessResources();
+            }
+
+            protected function application_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView/Application on Event.ADDED_TO_STAGE");
+            }
+
+            protected function application_updateCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE");
+            }
+
+            protected function contextViewList_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView.contextViewList on Event.ADDED_TO_STAGE");
+            }
+
+            protected function contextViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function application_applicationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.application_applicationCompleteHandler on FlexEvent.APPLICATION_COMPLETE");
+            }
+
+            protected function someViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function someViewList_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView.someViewList on Event.ADDED_TO_STAGE");
+            }
+
+            protected function onDataReceived(event:Event):void
+            {
+                var parser:SomeParser=new SomeParser();
+                var someParsedResult:ArrayCollection=parser.resultsAsArrayCollection(event.target.data);
+                contextViewList.dataProvider=someParsedResult;
+                trace("[Flex] ContextView.onDataReceived(event) contextViewList.dataProvider=someParsedResult");
+                trace("[Flex] ContextView.onDataReceived(event) someViewList.setListDataProvider(someParsedResult)");
+                someViewList.setListDataProvider(someParsedResult);
+            }
+
+            protected function onDataError(event:IOErrorEvent):void
+            {
+                trace("SomeXMLService.onDataError(event) " + event.text);
+            }
+
+            protected function securityErrorHandler(event:SecurityErrorEvent):void
+            {
+                trace("securityErrorHandler: " + event.text);
+            }
+
+            protected function httpStatusHandler(event:HTTPStatusEvent):void
+            {
+                trace("httpStatusHandler: " + event.toString());
+            }
+        ]]>
+    </fx:Script>
+    <s:DropDownList id="contextViewList"
+                    x="17"
+                    y="57"
+                    width="228"
+                    prompt="contextViewList"
+                    labelField="somename"
+                    addedToStage="contextViewList_addedToStageHandler(event)"
+                    creationComplete="contextViewList_creationCompleteHandler(event)"/>
+    <components:SomeView id="someViewList"
+                         x="277"
+                         y="57"
+                         addedToStage="someViewList_addedToStageHandler(event)"
+                         creationComplete="someViewList_creationCompleteHandler(event)"/>
+    <s:HGroup y="10"
+              height="25"
+              gap="20"
+              horizontalCenter="0"
+              verticalAlign="middle">
+        <s:Label id="demoTitle"
+                 text="{DEMO_TITLE}"/>
+        <s:Label id="demoNumber"
+                 fontSize="23"
+                 fontWeight="bold"
+                 text="Step: {DEMO_NUMBER}"/>
+    </s:HGroup>
+</s:Application>
