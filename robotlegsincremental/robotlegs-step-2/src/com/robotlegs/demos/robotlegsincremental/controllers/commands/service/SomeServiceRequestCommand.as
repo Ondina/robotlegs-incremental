@@ -17,7 +17,7 @@ package com.robotlegs.demos.robotlegsincremental.controllers.commands.service
         override public function execute():void
         {
             trace("[Impl] [Command] SomeServiceRequestCommand.execute()");
-            someService.accessRessources();
+            someService.accessResources();
         }
     }
 }

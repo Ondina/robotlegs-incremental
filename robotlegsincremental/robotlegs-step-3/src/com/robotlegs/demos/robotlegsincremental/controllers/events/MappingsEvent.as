@@ -20,7 +20,7 @@ package com.robotlegs.demos.robotlegsincremental.controllers.events
 
         override public function clone():Event
         {
-            return new SomeServiceRequestEvent(type, bubbles, cancelable);
+            return new MappingsEvent(type, bubbles, cancelable);
         }
     }
 }

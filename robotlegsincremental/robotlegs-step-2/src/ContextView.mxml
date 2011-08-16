@@ -36,9 +36,9 @@
             import mx.collections.ArrayCollection;
             import mx.events.FlexEvent;
 
-            public static const DEMO_NUMBER:String="2";
+			protected static const DEMO_NUMBER:String="2";
 
-            public static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
+			protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
 
             private var context:com.robotlegs.demos.robotlegsincremental.ApplicationContext;
 

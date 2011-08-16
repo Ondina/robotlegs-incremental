@@ -4,7 +4,7 @@ package com.robotlegs.demos.robotlegsincremental.services.interfaces
 
 	public interface ISomeService
 	{
-		function accessRessources():void;
+		function accessResources():void;
 		function set parser(value:ISomeParser):void;
 	}
 }

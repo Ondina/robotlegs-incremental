@@ -24,7 +24,7 @@ package com.robotlegs.demos.robotlegsincremental.services
 		}
 		
 		//todo: find a name to represent all kind of resources or services (web services, file system, data bases, etc) 
-		public function accessRessources():void
+		public function accessResources():void
 		{
 			//let's say it's an object - like event:ResultEvent from an RPC service	
 			var someObject:Object=[{name: "Some Name", id: 1}, {name: "Other Name", id: 2}, {name: "No Name", id: 3}];
