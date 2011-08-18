@@ -1,0 +1,48 @@
+1.	[Flex] ContextView/Application on FlexEvent.PREINITIALIZE
+2.	[Impl] [Context] Constructor ApplicationContext(contextView, autoStartup)
+3.	[RL  ] [Context] Constructor Context(contextView, autoStartup)
+4.	[RL  ] [Context] mapInjections()
+5.	[RL  ] [MediatorMap] Constructor MediatorMap(contextView, injector, reflector)
+6.	[RL  ] [Context] checkAutoStartup() contextView.stage ? startup() contextView.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage)
+7.	[Flex] ContextView/Application on FlexEvent.INITIALIZE
+8.	[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE
+9.	[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE
+10.	[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE
+11.	[Flex] ContextView/Application on Event.ADDED_TO_STAGE
+12.	[RL  ] [Context] onAddedToStage(Event.ADDED_TO_STAGE) [class ContextView]
+13.	[Impl] [Context] ApplicationContext.mapMappingsCommands() dispatchEvent(new MappingsEvent(MappingsEvent.START_MAPPING));
+14.	[Impl] [Command] MapControllersCommand.execute()
+15.	[Impl] [Command] MapModelsCommand.execute()
+16.	[Impl] [Command] MapServicesCommand.execute()
+17.	[Impl] [Command] MapViewsCommand.execute()
+18.	[RL  ] [MediatorMap] mapView() SomeView
+19.	[RL  ] [MediatorMap] addListeners() if (contextView)contextView.addEventListener(Event.ADDED_TO_STAGE)
+20.	[RL  ] [MediatorMap] mapView() ContextView
+21.	[RL  ] [MediatorMap] mapView() if (autoCreate && contextView) mapView() ContextView ApplicationMediator
+22.	[Impl] [Mediator] Constructor ApplicationMediator()
+23.	[RL  ] [MediatorBase] Constructor MediatorBase.MediatorBase() 
+24.	[RL  ] [Mediator] Constructor Mediator()
+25.	[RL  ] [MediatorMap] createMediatorUsing() [class ContextView] [object ApplicationMediator]
+26.	[RL  ] [MediatorMap] registerMediator() [object ApplicationMediator] for [class ContextView]
+27.	[RL  ] [MediatorBase] preRegister() [class ContextView] initialized
+28.	[Impl] [Mediator] ApplicationMediator.onRegister()
+29.	[Impl] [Context] ApplicationContext.onMappingComplete(MappingsEvent.MAPPING_COMPLETE) 
+30.	[Impl] [Command] SomeServiceRequestCommand.execute()
+31.	[Impl] [Service] SomeService.onDataReceived(someServiceResult:Array)
+32.	[Impl] [Command] SomeServiceResultCommand.execute()
+33.	[Impl] [Model] SomeModel.set someData(value)
+34.	[Impl] [Mediator] ApplicationMediator.onDataUpdated(event:SomeModelEvent) 
+35.	[Flex] ContextView.setListDataProvider(dataProvider) 
+36.	 [Impl] [Context] ApplicationContext.onStartUpComplete(ContextEvent.STARTUP_COMPLETE) 
+37.	[Flex] ContextView.contextViewList on Event.ADDED_TO_STAGE
+38.	[RL  ] [MediatorMap] MediatorMap.onViewAdded(e) [class SomeView] 
+39.	[Impl] [Mediator] Constructor SomeMediator()
+40.	[RL  ] [MediatorBase] Constructor MediatorBase.MediatorBase() 
+41.	[RL  ] [Mediator] Constructor Mediator()
+42.	[RL  ] [MediatorMap] createMediatorUsing() [class SomeView] [object SomeMediator]
+43.	[RL  ] [MediatorMap] registerMediator() [object SomeMediator] for [class SomeView]
+44.	[RL  ] [MediatorBase] preRegister() [class SomeView] initialized
+45.	[Impl] [Mediator] SomeMediator.onRegister() 
+46.	[Flex] ContextView.someViewList on Event.ADDED_TO_STAGE
+47.	[Impl] [Context] ApplicationContext.onApplicationComplete(FlexEvent.APPLICATION_COMPLETE) 
+48.	[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE

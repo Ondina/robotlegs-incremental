@@ -1,0 +1,9 @@
+
+The numbers used in the diagrams TraceStatements_sequence_onapplicationcomplete correspond 
+to the ones listed in the TraceStatements_text_onapplicationcomplete.txt
+
+
+TraceStatements_sequence_onapplicationcomplete  1 and 2 show the order of the trace statements
+
+TraceStatements_sequence_onapplicationcomplete 3 - simplified flow 
+(without MediatorBase and Mediator)- the order of execution is probably more accurate
