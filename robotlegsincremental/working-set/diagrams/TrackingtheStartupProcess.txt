@@ -7,32 +7,32 @@ Build a simple Flex application having 2 Lists, which will be populated with dat
 
 
 1.	Steps without Robotlegs:
-•	<s:Application name=”ContextView”>
-•	add a <s:DropDownList id=”contextViewList”/> to the ContextView
-•	add a custom component, which is a Panel containing a DropdownList, <components:SomeView id="someView"/>
-•	on FlexEvent.CREATION_COMPLETE access the XML file by using a URLLoader
-•	and  set the lists’ dataProvider 
+-	<s:Application name="ContextView">
+-	add a <s:DropDownList id="contextViewList"/> to the ContextView
+-	add a custom component, which is a Panel containing a DropdownList, <components:SomeView id="someView"/>
+-	on FlexEvent.CREATION_COMPLETE access the XML file by using a URLLoader
+-	and  set the lists' dataProvider 
 See flex-no-robotlegs-urlrequest - the code
 See before_robotlegs_01, before_robotlegs_02 - the diagrams
 
-Easy. But the service call is happening in the ContextView, and in case you want to make the same request somewhere else in your application you’d have to duplicate the code...and so on about the disadvantages of not using a MVC framework. (details ???)
+Easy. But the service call is happening in the ContextView, and in case you want to make the same request somewhere else in your application you'd have to duplicate the code...and so on about the disadvantages of not using a MVC framework. (details ???)
 
 2.	Steps with Robotlegs:
 a.	Project structure
 robotlegs-step-0-A  , robotlegs-step-0-B  , robotlegs-step-0-C  
-•	If you are not familiar with the robotlegs framework, here is a link http://www.robotlegs.org/  to get you started
-•	So now ( after 5 minutes or so;) ), that you know what robotlegs is about and its implementation of the  MVCS design pattern, you are ready to understand the example we are presenting and the terminology we are using
-•	<s:Application name=”ContextView”>
-•	add a <s:DropDownList id=”contextViewList”/> to the ContextView
-•	add a custom component, which is a Panel containing a DropdownList, <components:SomeView id="someView"/>
-•	create the mvc folders - see robotlegs-step-0-A  and put SomeView under views/components/
-•	add a context Class ApplicationContext - see see robotlegs-step-0-B 
-•	in robotlegs-step-0-C we create ApplicationMediator and SomeMediator, MapViewsCommand and MappingsEvent to accoplish the mapping of views to their mediators
-•	??? more steps and details?
-•	organize the project as shown in [Image URL] - robotlegs_incremental_step3_package_01.png
-•	the robotlegs classes that are used in the diagrams: ApplicationContext, MappingsEvent, ApplicationMediator, SomeMediator, SomeServiceRequestEvent, SomeServiceRequestCommand, SomeService, SomeServiceResultEvent , SomeServiceResultCommand, SomeModel, SomeModelEvent
-•	see story_01.png
-b.	To illustrate the flow of events and methods calls we use the output from trace statements. You can see them if you run the examples in debug mode. We use the robotlegs framework’s source to capture its internal flow . 
+-	If you are not familiar with the robotlegs framework, here is a link http://www.robotlegs.org/  to get you started
+-	So now ( after 5 minutes or so;) ), that you know what robotlegs is about and its implementation of the  MVCS design pattern, you are ready to understand the example we are presenting and the terminology we are using
+-	<s:Application name="ContextView">
+-	add a <s:DropDownList id="contextViewList"/> to the ContextView
+-	add a custom component, which is a Panel containing a DropdownList, <components:SomeView id="someView"/>
+-	create the mvc folders - see robotlegs-step-0-A  and put SomeView under views/components/
+-	add a context Class ApplicationContext - see see robotlegs-step-0-B 
+-	in robotlegs-step-0-C we create ApplicationMediator and SomeMediator, MapViewsCommand and MappingsEvent to accoplish the mapping of views to their mediators
+-	??? more steps and details?
+-	organize the project as shown in [Image URL] - robotlegs_incremental_step3_package_01.png
+-	the robotlegs classes that are used in the diagrams: ApplicationContext, MappingsEvent, ApplicationMediator, SomeMediator, SomeServiceRequestEvent, SomeServiceRequestCommand, SomeService, SomeServiceResultEvent , SomeServiceResultCommand, SomeModel, SomeModelEvent
+-	see story_01.png
+b.	To illustrate the flow of events and methods calls we use the output from trace statements. You can see them if you run the examples in debug mode. We use the robotlegs framework's source to capture its internal flow . 
 There are diagrams based on these trace statements:
 traces_01 to traces_05, TraceStatements_sequence_onapplicationcomplete_01, TraceStatements_sequence_onapplicationcomplete_02, TraceStatements_sequence_onapplicationcomplete_03, 
 and  as text:
@@ -44,10 +44,10 @@ The numbers used in the diagrams TraceStatements_sequence_onapplicationcomplete 
 c.	points in time for a service call
 code: robotlegs-step-1-A, robotlegs-step-1-B, robotlegs-step-2, robotlegs-step-3
 
-•	robotlegs-step-1-A - service call on MAPPING_COMPLETE - works for ContextView
-•	robotlegs-step-1-B - service call on MappingsEvent.START_MAPPING- doesn’t work
-•	robotlegs-step-2 service call on  MappingsEvent.MAPPING_COMPLETE doesn’t work for SomeView
-•	robotlegs-step-3 call on  after FlexEvent.APPLICATION_COMPLETE works for both
+-	robotlegs-step-1-A - service call on MAPPING_COMPLETE - works for ContextView
+-	robotlegs-step-1-B - service call on MappingsEvent.START_MAPPING- doesn't work
+-	robotlegs-step-2 service call on  MappingsEvent.MAPPING_COMPLETE doesn't work for SomeView
+-	robotlegs-step-3 call on  after FlexEvent.APPLICATION_COMPLETE works for both
 
 
 The diagrams : robotlegs_step_00 to robotlegs_step_03_A 
@@ -59,22 +59,22 @@ Here description of the steps.....after we decide which diagrams are good
 
 Solutions:
 
-To play it safe : In case of view components, other than the application container, a service call has to happen after the flex application has signalized its readiness (FlexEvent.APPLICATION_COMPLETE ). This way, you’ll be sure that SomeMediator has been mapped, created and registered and is ready to listen for an event dispatched by SomeModel......more details
+To play it safe : In case of view components, other than the application container, a service call has to happen after the flex application has signalized its readiness (FlexEvent.APPLICATION_COMPLETE ). This way, you'll be sure that SomeMediator has been mapped, created and registered and is ready to listen for an event dispatched by SomeModel......more details
 
 
 Alternative solutions:
-•	service call on MAPPING_COMPLETE, set the data in SomeModel, don’t dispatch any event, let SomeMediator onRegister call a command, that retrieves the data from SomeModel and dispatches an event with data as a payload, that the mediator will listen to
-•	StateMachine, RelaxedEventMap...others?
+-	service call on MAPPING_COMPLETE, set the data in SomeModel, don't dispatch any event, let SomeMediator onRegister call a command, that retrieves the data from SomeModel and dispatches an event with data as a payload, that the mediator will listen to
+-	StateMachine, RelaxedEventMap...others?
 
 
 
 To-do:
-•	renaming of diagrams and maybe code too
-•	more details for each step
-•	check if the diagrams show the correct flow
-•	test the code
-•	code comments
-•	deciding which diagrams to use
+-	renaming of diagrams and maybe code too
+-	more details for each step
+-	check if the diagrams show the correct flow
+-	test the code
+-	code comments
+-	deciding which diagrams to use
 
 ####
 1.	flex-no-robotlegs-httprequest - simple URLRequest 
@@ -83,13 +83,13 @@ To-do:
 4.	robotlegs-step-0-C - add mediators and map them to views
 5.	robotlegs-service-wrapper - complete app with 2 services and a service wrapper
 6.	robotlegs-step-1-A -only ContextView- service call on MAPPING_COMPLETE - o.k. for ContextView
-7.	robotlegs-step-1-B -only ContextView-service call on START_MAPPING-doesn’t work
-8.	robotlegs-step-2 - ContextView + SomeView - service call on MAPPING_COMPLETE - doesn’t work for SomeView
+7.	robotlegs-step-1-B -only ContextView-service call on START_MAPPING-doesn't work
+8.	robotlegs-step-2 - ContextView + SomeView - service call on MAPPING_COMPLETE - doesn't work for SomeView
 9.	robotlegs-step-3 ContextView + SomeView - service call on APPLICATION_COMPLETE o.k. for both
 
 
 
-To load an example ( “robotlegs-step-0-A” ) you have to create a 
+To load an example ( “robotlegs-step-0-A" ) you have to create a 
 New Flex Project
 Project Name:  robotlegs-step-0-A (or whatever you want it to be)
 Project Location: YourDrive:\YourWebRoot\robotlegs-incremental\robotlegs-step-0-A
