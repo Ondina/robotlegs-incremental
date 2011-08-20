@@ -89,7 +89,7 @@ To-do:
 
 
 
-To load an example ( “robotlegs-step-0-A" ) you have to create a 
+To load an example ( "obotlegs-step-0-A" ) you have to create a 
 New Flex Project
 Project Name:  robotlegs-step-0-A (or whatever you want it to be)
 Project Location: YourDrive:\YourWebRoot\robotlegs-incremental\robotlegs-step-0-A
