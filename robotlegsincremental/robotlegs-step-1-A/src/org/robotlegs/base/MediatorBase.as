@@ -70,8 +70,7 @@ package org.robotlegs.base
 			removed = false;
 			if (flexAvailable && (viewComponent is UIComponentClass) && !viewComponent['initialized'])
 			{
-				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.constructor+" NOT initialized");
-				
+				trace("[RL  ] [MediatorBase] preRegister() "+viewComponent.constructor+" NOT initialized");				
 				IEventDispatcher(viewComponent).addEventListener('creationComplete', onCreationComplete, false, 0, true);
 			}
 			else
@@ -151,8 +150,7 @@ package org.robotlegs.base
 		 */
 		protected function onCreationComplete(e:Event):void
 		{
-			trace("[RL  ] [MediatorBase] onCreationComplete(e) "+viewComponent.constructor);
-			
+			trace("[RL  ] [MediatorBase] onCreationComplete(e) "+viewComponent.constructor);			
 			IEventDispatcher(e.target).removeEventListener('creationComplete', onCreationComplete);
 			
 			if (!removed)

@@ -35,10 +35,11 @@
             import com.robotlegs.demos.robotlegsincremental.ApplicationContext;
             import mx.events.FlexEvent;
 
-            protected static const DEMO_NUMBER:String="0-B";
+            //adding ApplicationContext
+            protected static const DEMO_NUMBER:String="0-B adding ApplicationContext";
             protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
 
-            private var context:com.robotlegs.demos.robotlegsincremental.ApplicationContext;
+            private var context:ApplicationContext;
 
             /* instantiates  ApplicationContext */
             protected function application_preinitializeHandler(event:FlexEvent):void
@@ -47,6 +48,7 @@
                 context=new ApplicationContext(this);
             }
 
+            /* traces */
             protected function application_initializeHandler(event:FlexEvent):void
             {
                 trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
@@ -96,7 +98,7 @@
                     labelField="somename"
                     addedToStage="contextViewList_addedToStageHandler(event)"
                     creationComplete="contextViewList_creationCompleteHandler(event)"/>
-    <components:SomeView id="someViewList"
+    <components:SomeView id="someView"
                          x="277"
                          y="57"
                          addedToStage="someViewList_addedToStageHandler(event)"

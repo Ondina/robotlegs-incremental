@@ -1,9 +1,9 @@
 package com.robotlegs.demos.robotlegsincremental
 {
-    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping.MapControllersCommand;
-    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping.MapModelsCommand;
-    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping.MapServicesCommand;
-    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping.MapViewsCommand;
+    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings.MapControllersCommand;
+    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings.MapModelsCommand;
+    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings.MapServicesCommand;
+    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings.MapViewsCommand;
     import com.robotlegs.demos.robotlegsincremental.controllers.events.MappingsEvent;
     
     import flash.display.DisplayObjectContainer;

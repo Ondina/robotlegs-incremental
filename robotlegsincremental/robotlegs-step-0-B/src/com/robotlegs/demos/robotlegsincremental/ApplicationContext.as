@@ -25,8 +25,6 @@ package com.robotlegs.demos.robotlegsincremental
         {
             registerListeners();
 
-
-
             super.startup();
         }
 
@@ -36,7 +34,6 @@ package com.robotlegs.demos.robotlegsincremental
             trace("[Impl] [Context]***************** ApplicationContext.onApplicationComplete(FlexEvent.APPLICATION_COMPLETE) ****************");
             trace("**********************************************************************************");
         }
-
 
         protected function onStartUpComplete(event:ContextEvent):void
         {

@@ -1,6 +1,6 @@
 package com.robotlegs.demos.robotlegsincremental
 {
-    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mapping.MapViewsCommand;
+    import com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings.MapViewsCommand;
     import com.robotlegs.demos.robotlegsincremental.controllers.events.MappingsEvent;
     
     import flash.display.DisplayObjectContainer;

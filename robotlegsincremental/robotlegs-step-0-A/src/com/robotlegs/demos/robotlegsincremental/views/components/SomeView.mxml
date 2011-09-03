@@ -17,7 +17,7 @@
             }
         ]]>
     </fx:Script>
-    <s:DropDownList id="someViewList"
+     <s:DropDownList id="someViewList"
                     x="10"
                     y="18"
                     width="228"

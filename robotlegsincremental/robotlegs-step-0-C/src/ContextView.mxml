@@ -33,13 +33,13 @@
              */
 
             import com.robotlegs.demos.robotlegsincremental.ApplicationContext;
-            
             import mx.events.FlexEvent;
 
-            protected static const DEMO_NUMBER:String="0-C";
+            //create mediators, mapping views to mediators
+            protected static const DEMO_NUMBER:String="0-C - mapping Views to Mediators";
             protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
 
-            private var context:com.robotlegs.demos.robotlegsincremental.ApplicationContext;
+            private var context:ApplicationContext;
 
             /* instantiates  ApplicationContext */
             protected function application_preinitializeHandler(event:FlexEvent):void
@@ -48,6 +48,7 @@
                 context=new ApplicationContext(this);
             }
 
+            /* traces */
             protected function application_initializeHandler(event:FlexEvent):void
             {
                 trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
@@ -68,11 +69,6 @@
                 trace("[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE");
             }
 
-            protected function contextViewList_addedToStageHandler(event:Event):void
-            {
-                trace("[Flex] ContextView.contextViewList on Event.ADDED_TO_STAGE");
-            }
-
             protected function contextViewList_creationCompleteHandler(event:FlexEvent):void
             {
                 trace("[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE");
@@ -82,11 +78,6 @@
             {
                 trace("[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE");
             }
-
-            protected function someViewList_addedToStageHandler(event:Event):void
-            {
-                trace("[Flex] ContextView.someViewList on Event.ADDED_TO_STAGE");
-            }
         ]]>
     </fx:Script>
     <s:DropDownList id="contextViewList"
@@ -95,12 +86,10 @@
                     width="228"
                     prompt="contextViewList"
                     labelField="somename"
-                    addedToStage="contextViewList_addedToStageHandler(event)"
                     creationComplete="contextViewList_creationCompleteHandler(event)"/>
-    <components:SomeView id="someViewList"
+    <components:SomeView id="someView"
                          x="277"
                          y="57"
-                         addedToStage="someViewList_addedToStageHandler(event)"
                          creationComplete="someViewList_creationCompleteHandler(event)"/>
     <s:HGroup y="10"
               height="25"

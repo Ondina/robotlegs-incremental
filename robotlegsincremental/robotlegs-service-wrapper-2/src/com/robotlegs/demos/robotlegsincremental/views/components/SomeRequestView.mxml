@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<components:SomeMessageView xmlns:fx="http://ns.adobe.com/mxml/2009"
+                            xmlns:s="library://ns.adobe.com/flex/spark"
+                            xmlns:mx="library://ns.adobe.com/flex/mx"
+                            xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*"
+                            title="Alternative Call?"
+                            minHeight="250"
+                            minWidth="300">
+    <fx:Declarations>
+        <s:Button id="alternativeServiceCallButton"
+                  horizontalCenter="0"
+                  y="36"
+                  label="alternative Service"
+                  click="alternativeServiceCallButton_clickHandler()"/>
+    </fx:Declarations>
+    <fx:Script>
+        <![CDATA[
+            import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeAlternativeServiceRequestEvent;
+
+            public function onSomeServiceError(someMessage:String):void
+            {
+                trace("SomeRequestView.onSomeServiceError");
+				super.addChildren(alternativeServiceCallButton);
+                super.showSomeMessage(someMessage);
+            }
+
+            protected function alternativeServiceCallButton_clickHandler():void
+            {
+                dispatchEvent(new SomeAlternativeServiceRequestEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED));
+				super.removeChildren(alternativeServiceCallButton);
+                this.visible=false;
+            }
+        ]]>
+    </fx:Script>
+</components:SomeMessageView>

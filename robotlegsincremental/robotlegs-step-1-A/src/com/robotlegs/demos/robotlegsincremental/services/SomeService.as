@@ -23,10 +23,8 @@ package com.robotlegs.demos.robotlegsincremental.services
 			_parser=value;
 		}
 		
-		//todo: find a (better?) name to represent all kind of resources or services (web services, file system, data bases, etc) 
 		public function accessResources():void
 		{
-			//let's say it's an object - like event:ResultEvent from an RPC service	
 			var someObject:Object=[{name: "Some Name", id: 1}, {name: "Other Name", id: 2}, {name: "No Name", id: 3}];
 			onDataReceived(someObject);
 		}
@@ -34,7 +32,7 @@ package com.robotlegs.demos.robotlegsincremental.services
 		private function onDataReceived(someResult:Object):void
 		{
 			trace("[Impl] [Service] SomeService.onDataReceived(someServiceResult:Array)");
-			var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(someResult);            
+			var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(someResult);
 			dispatch(new SomeServiceResultEvent(SomeServiceResultEvent.DATA_RECEIVED, someParsedResult));
 		}
 	}

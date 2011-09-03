@@ -265,8 +265,7 @@ package org.robotlegs.mvcs
 			
 			if (_autoStartup && contextView)
 			{
-				trace("[RL  ] [Context] checkAutoStartup() contextView.stage ? startup() : contextView.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage)");
-				
+				trace("[RL  ] [Context] checkAutoStartup() contextView.stage ? startup() : contextView.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage)");				
 				contextView.stage ? startup() : contextView.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage, false, 0, true);
 			}
 		}

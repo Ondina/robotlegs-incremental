@@ -12,44 +12,97 @@
                name="ContextView">
     <fx:Script>
         <![CDATA[
-           import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
-           
-           import mx.collections.ArrayCollection;
-           import mx.events.FlexEvent;
+            import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
+            import mx.collections.ArrayCollection;
+            import mx.events.FlexEvent;
 
-            protected static const DEMO_NUMBER:String="Without Robotlegs";
+            protected static const DEMO_NUMBER:String="Without Robotlegs - Simple URL Request";
             protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex Application";
+			protected static const XML_URL:String="http://localhost/robotlegs-incremental-resources/xml/SomeXML.xml"; //change it to your path
 
- 
-            public function setListDataProvider(dataProvider:ArrayCollection):void
+            protected var urlLoader:URLLoader;
+
+            /* access resources */
+            protected function accessResources():void
+            {
+                trace("[Flex] ContextView.accessResources() urlLoader.addEventListener(Event.COMPLETE, onDataReceived);");
+                var urlRequest:URLRequest=new URLRequest(XML_URL);
+                urlLoader=new URLLoader();
+                urlLoader.dataFormat=URLLoaderDataFormat.TEXT;
+
+                registerListeners();
+
+                urlLoader.load(urlRequest);
+            }
+
+            protected function registerListeners():void
+            {
+                urlLoader.addEventListener(Event.COMPLETE, onDataReceived);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, IOErrorHandler);
+                urlLoader.addEventListener(IOErrorEvent.NETWORK_ERROR, IOErrorHandler);
+                urlLoader.addEventListener(IOErrorEvent.VERIFY_ERROR, IOErrorHandler);
+                urlLoader.addEventListener(IOErrorEvent.DISK_ERROR, IOErrorHandler);
+                urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+                //urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+            }
+
+            protected function unregisterListeners():void
+            {
+                urlLoader.removeEventListener(Event.COMPLETE, onDataReceived);
+                urlLoader.removeEventListener(IOErrorEvent.IO_ERROR, IOErrorHandler);
+                urlLoader.removeEventListener(IOErrorEvent.NETWORK_ERROR, IOErrorHandler);
+                urlLoader.removeEventListener(IOErrorEvent.VERIFY_ERROR, IOErrorHandler);
+                urlLoader.removeEventListener(IOErrorEvent.DISK_ERROR, IOErrorHandler);
+                urlLoader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+                //urlLoader.removeEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+            }
+
+            protected function onDataReceived(event:Event):void
+            {
+				unregisterListeners();
+                var parser:SomeParser=new SomeParser();
+                var someParsedResult:ArrayCollection=parser.resultsAsArrayCollection(event.target.data);
+                trace("[Flex] ContextView.onDataReceived(event) contextViewList.dataProvider=someParsedResult");
+                contextViewList.dataProvider=someParsedResult;
+                trace("[Flex] ContextView.onDataReceived(event) someViewList.setListDataProvider(someParsedResult)");
+                someViewList.setListDataProvider(someParsedResult);
+            }
+
+            protected function setListDataProvider(dataProvider:ArrayCollection):void
             {
                 trace("[Flex] ContextView.setListDataProvider(dataProvider) <<<<<<<<<<<<<<<<<");
                 contextViewList.dataProvider=dataProvider;
             }
 
-            //////////////////////////////////////
-            public function accessResources():void
+            protected function IOErrorHandler(event:IOErrorEvent):void
             {
-
-                trace("[Flex] ContextView.accessResources() urlLoader.addEventListener(Event.COMPLETE, onDataReceived);");
-                var url:String="http://localhost/robotlegs-incremental/flex-no-robotlegs-urlrequest/resources/xml/SomeXML.xml";
-                var urlRequest:URLRequest=new URLRequest(url);
-                var urlLoader:URLLoader=new URLLoader();
-
-                urlLoader.dataFormat=URLLoaderDataFormat.TEXT;
-                urlLoader.addEventListener(Event.COMPLETE, onDataReceived);
-                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, onDataError);
-                urlLoader.addEventListener(IOErrorEvent.NETWORK_ERROR, onDataError);
-                urlLoader.addEventListener(IOErrorEvent.VERIFY_ERROR, onDataError);
-                urlLoader.addEventListener(IOErrorEvent.DISK_ERROR, onDataError);
-                urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-
-                urlLoader.load(urlRequest);
+                trace("[Flex] ContextView.onIOError(event) " + event.text);
+                onServiceError(event.text);
             }
 
+            protected function securityErrorHandler(event:SecurityErrorEvent):void
+            {
+                trace("[Flex] ContextView.securityErrorHandler: " + event.text);
+                onServiceError(event.text);
+            }
+
+            protected function httpStatusHandler(event:HTTPStatusEvent):void
+            {
+                trace("[Flex] ContextView.httpStatusHandler: " + event.toString());
+            }
+
+            protected function onServiceError(message:String):void
+            {
+				unregisterListeners();
+                urlLoader=null;
+                someErrorView.visible=true;
+                someErrorView.alertMessagesText.text=message;
+            }
+
+            /* traces flex events */
             protected function application_preinitializeHandler(event:FlexEvent):void
             {
-                trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");	
+                trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");
             }
 
             protected function application_initializeHandler(event:FlexEvent):void
@@ -57,6 +110,7 @@
                 trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
             }
 
+            /*===============> service call */
             protected function application_creationCompleteHandler(event:FlexEvent):void
             {
                 trace("[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE");
@@ -97,31 +151,6 @@
             {
                 trace("[Flex] ContextView.someViewList on Event.ADDED_TO_STAGE");
             }
-
-            protected function onDataReceived(event:Event):void
-            {
-                var parser:SomeParser=new SomeParser();
-                var someParsedResult:ArrayCollection=parser.resultsAsArrayCollection(event.target.data);
-                contextViewList.dataProvider=someParsedResult;
-                trace("[Flex] ContextView.onDataReceived(event) contextViewList.dataProvider=someParsedResult");
-                trace("[Flex] ContextView.onDataReceived(event) someViewList.setListDataProvider(someParsedResult)");
-                someViewList.setListDataProvider(someParsedResult);
-            }
-
-            protected function onDataError(event:IOErrorEvent):void
-            {
-                trace("SomeXMLService.onDataError(event) " + event.text);
-            }
-
-            protected function securityErrorHandler(event:SecurityErrorEvent):void
-            {
-                trace("securityErrorHandler: " + event.text);
-            }
-
-            protected function httpStatusHandler(event:HTTPStatusEvent):void
-            {
-                trace("httpStatusHandler: " + event.toString());
-            }
         ]]>
     </fx:Script>
     <s:DropDownList id="contextViewList"
@@ -137,6 +166,10 @@
                          y="57"
                          addedToStage="someViewList_addedToStageHandler(event)"
                          creationComplete="someViewList_creationCompleteHandler(event)"/>
+    <components:SomeErrorView id="someErrorView"
+                              horizontalCenter="0"
+                              y="200"
+                              visible="false"/>
     <s:HGroup y="10"
               height="25"
               gap="20"

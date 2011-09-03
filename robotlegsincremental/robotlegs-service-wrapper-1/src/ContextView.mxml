@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*"
+               preinitialize="application_preinitializeHandler(event)"
+               initialize="application_initializeHandler(event)"
+               creationComplete="application_creationCompleteHandler(event)"
+               addedToStage="application_addedToStageHandler(event)"
+               updateComplete="application_updateCompleteHandler(event)"
+               name="ContextView">
+    <fx:Declarations>
+        <!--
+        xmlns:context="com.test.ContextView.*"
+        <context:ApplicationContext contextView="{this}" />
+        -->
+    </fx:Declarations>
+    <fx:Script>
+        <![CDATA[
+            import com.robotlegs.demos.robotlegsincremental.ApplicationContext;
+            import mx.collections.ArrayCollection;
+            import mx.events.FlexEvent;
+
+            //ContextView and SomeView - service call on FlexEvent.APPLICATION_COMPLETE - working for both lists+ service wrapper
+            protected static const DEMO_NUMBER:String="2 services and a wrapper";
+            protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
+
+            private var context:ApplicationContext;
+
+            /* invoked by ApplicationMediator.onDataUpdated  */
+            public function setListDataProvider(dataProvider:ArrayCollection):void
+            {
+                trace("[Flex] ContextView.setListDataProvider(dataProvider) <<<<<<<<<<<<<<<<<");
+                contextViewList.dataProvider=dataProvider;
+            }
+
+            /* instantiates  ApplicationContext */
+            protected function application_preinitializeHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");
+                context=new ApplicationContext(this);
+            }
+
+            /* traces */
+            protected function application_initializeHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
+            }
+
+            protected function application_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function application_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView/Application on Event.ADDED_TO_STAGE");
+            }
+
+            protected function application_updateCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE");
+            }
+
+            protected function contextViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function someViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE");
+            }
+        ]]>
+    </fx:Script>
+    <s:DropDownList id="contextViewList"
+                    x="17"
+                    y="57"
+                    width="228"
+                    prompt="contextViewList"
+                    labelField="somename"
+                    creationComplete="contextViewList_creationCompleteHandler(event)"/>
+    <components:SomeView id="someView"
+                         x="277"
+                         y="57"
+                         creationComplete="someViewList_creationCompleteHandler(event)"/>
+    <s:HGroup y="10"
+              height="25"
+              gap="20"
+              horizontalCenter="0"
+              verticalAlign="middle">
+        <s:Label id="demoTitle"
+                 text="{DEMO_TITLE}"/>
+        <s:Label id="demoNumber"
+                 fontSize="23"
+                 fontWeight="bold"
+                 text="Step: {DEMO_NUMBER}"/>
+    </s:HGroup>
+</s:Application>

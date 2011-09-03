@@ -96,7 +96,7 @@ package org.robotlegs.base
 		public function mapView(viewClassOrName:*, mediatorClass:Class, injectViewAs:* = null, autoCreate:Boolean = true, autoRemove:Boolean = true):void
 		{
 			var viewClassName:String = reflector.getFQCN(viewClassOrName);
-			trace("[RL  ] [MediatorMap] mapView() "+viewClassName);
+			trace("[RL  ] [MediatorMap] mapView() "+viewClassOrName);
 			if (mappingConfigByViewClassName[viewClassName] != null)
 				throw new ContextError(ContextError.E_MEDIATORMAP_OVR + ' - ' + mediatorClass);
 			
@@ -129,8 +129,7 @@ package org.robotlegs.base
 				viewListenerCount++;
 				if (viewListenerCount == 1)
 					addListeners();				
-			}
-			
+			}			
 			// This was a bad idea - causes unexpected eager instantiation of object graph 						
 			if (autoCreate && contextView && (viewClassName == getQualifiedClassName(contextView) ))
 			{
@@ -251,7 +250,7 @@ package org.robotlegs.base
 		{
 			if (contextView && enabled)
 			{
-				trace("[RL  ] [MediatorMap] addListeners() if (contextView) contextView.addEventListener(Event.ADDED_TO_STAGE)");
+				trace("[RL  ] [MediatorMap] addListeners() if (contextView) contextView.addEventListener(Event.ADDED_TO_STAGE, onViewAdded)");
 				
 				contextView.addEventListener(Event.ADDED_TO_STAGE, onViewAdded, useCapture, 0, true);
 				contextView.addEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved, useCapture, 0, true);

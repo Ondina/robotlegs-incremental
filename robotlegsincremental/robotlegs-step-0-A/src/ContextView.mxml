@@ -29,9 +29,10 @@
 
             import mx.events.FlexEvent;
 
-            protected static const DEMO_NUMBER:String="0-A";
+            //creating project structure - no robotlegs implementation
+            protected static const DEMO_NUMBER:String="0-A Project Structure";
             protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex-Robotlegs Application";
-            
+
             protected function application_preinitializeHandler(event:FlexEvent):void
             {
                 trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");
@@ -91,7 +92,7 @@
                     labelField="somename"
                     addedToStage="contextViewList_addedToStageHandler(event)"
                     creationComplete="contextViewList_creationCompleteHandler(event)"/>
-    <components:SomeView id="someViewList"
+    <components:SomeView id="someView"
                          x="277"
                          y="57"
                          addedToStage="someViewList_addedToStageHandler(event)"

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*"
+               preinitialize="application_preinitializeHandler(event)"
+               initialize="application_initializeHandler(event)"
+               creationComplete="application_creationCompleteHandler(event)"
+               addedToStage="application_addedToStageHandler(event)"
+               updateComplete="application_updateCompleteHandler(event)"
+               applicationComplete="application_applicationCompleteHandler(event)"
+               name="ContextView">
+    <fx:Script>
+        <![CDATA[
+            import com.robotlegs.demos.robotlegsincremental.utils.SomeParser;
+            
+            import mx.collections.ArrayCollection;
+            import mx.events.FlexEvent;
+
+            protected static const DEMO_NUMBER:String="Without Robotlegs - Embeded XML";
+            protected static const DEMO_TITLE:String="Tracking the Start-Up Process of a Flex Application";
+
+            [Embed(source="../resources/xml/SomeXML.xml", mimeType="text/xml")]
+            public var SomeXML:Class;
+
+            /* access resources */
+            protected function accessResources():void
+            {
+                var xml:XML=XML(SomeXML.data);
+                var parser:SomeParser=new SomeParser();
+                var someParsedResult:ArrayCollection=parser.resultsAsArrayCollection(xml);
+				
+				trace("[Flex] ContextView.accessResources() contextViewList.dataProvider=someParsedResult");				
+                setListDataProvider(someParsedResult);
+                trace("[Flex] ContextView.accessResources() someViewList.setListDataProvider(someParsedResult)");
+                someViewList.setListDataProvider(someParsedResult);
+            }
+
+            protected function setListDataProvider(dataProvider:ArrayCollection):void
+            {
+                trace("[Flex] ContextView.setListDataProvider(dataProvider) <<<<<<<<<<<<<<<<<");
+                contextViewList.dataProvider=dataProvider;
+            }
+
+            /* traces flex events */
+            protected function application_preinitializeHandler(event:FlexEvent):void
+            {
+
+                trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");
+            }
+
+            protected function application_initializeHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
+            }
+
+            /*===============> load xml */
+            protected function application_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE");
+                accessResources();
+            }
+
+            protected function application_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView/Application on Event.ADDED_TO_STAGE");
+            }
+
+            protected function application_updateCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE");
+            }
+
+            protected function contextViewList_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView.contextViewList on Event.ADDED_TO_STAGE");
+            }
+
+            protected function contextViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function application_applicationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.application_applicationCompleteHandler on FlexEvent.APPLICATION_COMPLETE");
+            }
+
+            protected function someViewList_creationCompleteHandler(event:FlexEvent):void
+            {
+                trace("[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE");
+            }
+
+            protected function someViewList_addedToStageHandler(event:Event):void
+            {
+                trace("[Flex] ContextView.someViewList on Event.ADDED_TO_STAGE");
+            }          
+        ]]>
+    </fx:Script>
+    <s:DropDownList id="contextViewList"
+                    x="17"
+                    y="57"
+                    width="228"
+                    prompt="contextViewList"
+                    labelField="somename"
+                    addedToStage="contextViewList_addedToStageHandler(event)"
+                    creationComplete="contextViewList_creationCompleteHandler(event)"/>
+    <components:SomeView id="someViewList"
+                         x="277"
+                         y="57"
+                         addedToStage="someViewList_addedToStageHandler(event)"
+                         creationComplete="someViewList_creationCompleteHandler(event)"/>
+    <s:HGroup y="10"
+              height="25"
+              gap="20"
+              horizontalCenter="0"
+              verticalAlign="middle">
+        <s:Label id="demoTitle"
+                 text="{DEMO_TITLE}"/>
+        <s:Label id="demoNumber"
+                 fontSize="23"
+                 fontWeight="bold"
+                 text="Step: {DEMO_NUMBER}"/>
+    </s:HGroup>
+</s:Application>
