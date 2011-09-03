@@ -12,6 +12,7 @@ obj/*
 .flexLibProperties
 .FlexUnitSettings
 .project
+.fxpProperties
 
 Icon
 Thumbs.db
