@@ -17,7 +17,7 @@
             import mx.collections.ArrayCollection;
             import mx.events.FlexEvent;
 
-            public var context:ApplicationContext;
+            protected var context:ApplicationContext;
 
             /* instantiates  ApplicationContext */
             protected function application_preinitializeHandler(event:FlexEvent):void
