@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--SomeXML-->
+<somexml>
+  <someitem>
+  <somename>Some Name</somename>
+  <someid>0</someid>
+  </someitem>
+  <someitem>
+  <somename>Other Name</somename>
+  <someid>1</someid>
+  </someitem>
+  <someitem>
+  <somename>No Name</somename>
+  <someid>2</someid>
+  </someitem>
+</somexml>
