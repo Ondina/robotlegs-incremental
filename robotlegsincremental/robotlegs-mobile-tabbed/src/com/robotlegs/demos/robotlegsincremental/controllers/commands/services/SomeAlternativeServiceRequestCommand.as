@@ -20,7 +20,6 @@ package com.robotlegs.demos.robotlegsincremental.controllers.commands.services
 
         override public function execute():void
         {
-            trace("[Impl] [Command] SomeAlternativeServiceRequestCommand.execute()");
             wrapper.implementation=someService;
             wrapper.implementation.accessResources();
         }

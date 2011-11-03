@@ -44,7 +44,6 @@ package com.robotlegs.demos.robotlegsincremental.services
 			urlLoader.dataFormat=URLLoaderDataFormat.TEXT;
 			
 			registerListeners();
-			trace("SomeXMLService.accessResources()");
 			
 			urlLoader.load(urlRequest);
 		}
@@ -53,20 +52,17 @@ package com.robotlegs.demos.robotlegsincremental.services
         protected function onDataReceived(event:Event):void
         {
 			unregisterListeners();
-			trace("[Impl] [Service] SomeXMLService.onDataReceived(someServiceResult:Array)");
 			var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(event.target.data);
 			dispatch(new SomeServiceResultEvent(SomeServiceResultEvent.DATA_RECEIVED, someParsedResult));
         }
 
 		protected function IOErrorHandler(event:IOErrorEvent):void
 		{
-			trace("[Impl] [Service] SomeXMLService.onIOError(event) " + event.text);
 			onServiceError(event.text);
 		}
 		
 		protected function securityErrorHandler(event:SecurityErrorEvent):void
 		{
-			trace("[Impl] [Service] SomeXMLService securityErrorHandler: " + event.text);
 			onServiceError(event.text);
 		}
 		
@@ -77,7 +73,6 @@ package com.robotlegs.demos.robotlegsincremental.services
 		
 		protected function onServiceError(message:String):void
 		{
-			trace("SomeXMLService.onServiceError(message)");
 			unregisterListeners();
 			urlLoader.close();			
 			urlLoader=null;

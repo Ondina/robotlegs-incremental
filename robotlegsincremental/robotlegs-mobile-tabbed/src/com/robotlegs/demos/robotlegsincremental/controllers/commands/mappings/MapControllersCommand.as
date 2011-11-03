@@ -19,8 +19,6 @@ package com.robotlegs.demos.robotlegsincremental.controllers.commands.mappings
 
         override public function execute():void
         {
-            trace("[Impl] [Command] MapControllersCommand.execute()");
-
             commandMap.mapEvent(SomeServiceRequestEvent.DATA_REQUESTED, SomeServiceRequestCommand, SomeServiceRequestEvent, false);
 			commandMap.mapEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED, SomeAlternativeServiceRequestCommand, SomeAlternativeServiceRequestEvent, false);
             commandMap.mapEvent(SomeServiceResultEvent.DATA_RECEIVED, SomeServiceResultCommand, SomeServiceResultEvent, false);

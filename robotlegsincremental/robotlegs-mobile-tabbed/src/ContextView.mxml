@@ -3,10 +3,7 @@
                                   xmlns:s="library://ns.adobe.com/flex/spark"
                                   xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*"
                                   preinitialize="application_preinitializeHandler(event)"
-                                  initialize="application_initializeHandler(event)"
                                   creationComplete="application_creationCompleteHandler(event)"
-                                  addedToStage="application_addedToStageHandler(event)"
-                                  updateComplete="application_updateCompleteHandler(event)"
                                   name="ContextView">
     <fx:Script>
         <![CDATA[
@@ -15,56 +12,27 @@
             import mx.events.FlexEvent;
             import spark.events.IndexChangeEvent;
 
-            public var context:ApplicationContext;
+            protected var context:ApplicationContext;
 
-			protected function application_preinitializeHandler(event:FlexEvent):void
-			{
-				trace("[Flex] ContextView/Application on FlexEvent.PREINITIALIZE");
-				context=new ApplicationContext(this);
-			}
-			
             public function changeStackIndex(viewStackIndex:int):void
             {
-                 if (viewStackIndex != -1 && viewStackIndex < tabbedNavigator.length)
+                if (viewStackIndex != -1 && viewStackIndex < tabbedNavigator.length)
                     tabbedNavigator.selectedIndex=viewStackIndex;
             }
-			
-			protected function onStackIndexChange(event:IndexChangeEvent):void
-			{
-				trace("ContextView.onStackIndexChange(event)");
-				dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, tabbedNavigator.selectedIndex));
-			}
-			
-            /* traces */
-            protected function application_initializeHandler(event:FlexEvent):void
+
+            protected function application_preinitializeHandler(event:FlexEvent):void
             {
-                trace("[Flex] ContextView/Application on FlexEvent.INITIALIZE");
+                context=new ApplicationContext(this);
+            }
+
+            protected function onStackIndexChange(event:IndexChangeEvent):void
+            {
+                dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, tabbedNavigator.selectedIndex));
             }
 
             protected function application_creationCompleteHandler(event:FlexEvent):void
             {
-                trace("[Flex] ContextView/Application on FlexEvent.CREATION_COMPLETE");
                 tabbedNavigator.addEventListener(IndexChangeEvent.CHANGE, onStackIndexChange);
-            }
-
-            protected function application_addedToStageHandler(event:Event):void
-            {
-                trace("[Flex] ContextView/Application on Event.ADDED_TO_STAGE");
-            }
-
-            protected function application_updateCompleteHandler(event:FlexEvent):void
-            {
-                trace("[Flex] ContextView/Application on FlexEvent.UPDATE_COMPLETE");
-            }
-
-            protected function contextViewList_creationCompleteHandler(event:FlexEvent):void
-            {
-                trace("[Flex] ContextView.contextViewList on FlexEvent.CREATION_COMPLETE");
-            }
-
-            protected function someViewList_creationCompleteHandler(event:FlexEvent):void
-            {
-                trace("[Flex] ContextView.someViewList on FlexEvent.CREATION_COMPLETE");
             }
         ]]>
     </fx:Script>

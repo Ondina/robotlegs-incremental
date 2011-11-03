@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                            xmlns:s="library://ns.adobe.com/flex/spark"
+                            preinitialize="application_preinitializeHandler(event)"
+                            name="ContextView"
+                            firstView="{SomeView}">
+    <fx:Script>
+        <![CDATA[
+            import com.robotlegs.demos.robotlegsincremental.ApplicationContext;
+            import com.robotlegs.demos.robotlegsincremental.views.components.SomeView;
+            import mx.events.FlexEvent;
+
+            protected var context:ApplicationContext;
+
+            public function changeActiveView(viewClass:Class):void
+            {
+                navigator.pushView(viewClass);
+                //dispatchEvent(new NavigationEvent(NavigationEvent.ACTIVE_VIEW_CHANGED, viewClass));
+            }
+
+            protected function application_preinitializeHandler(event:FlexEvent):void
+            {
+                context=new ApplicationContext(this);
+
+            }
+
+            protected function goToPreviousView():void
+            {
+                if (navigator.length > 1)
+                    navigator.popView();
+            }
+        ]]>
+    </fx:Script>
+    <s:navigationContent>
+        <s:Button label="Home"
+                  click="navigator.popToFirstView()"/>
+        <s:Button label="Back"
+                  click="goToPreviousView()"/>
+    </s:navigationContent>
+</s:ViewNavigatorApplication>

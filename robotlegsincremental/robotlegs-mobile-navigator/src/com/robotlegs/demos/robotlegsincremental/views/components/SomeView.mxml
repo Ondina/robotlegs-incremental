@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        title="SomeView"
+        name="SomeView">
+    <fx:Script>
+        <![CDATA[
+            import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewListEvent;
+            import mx.collections.ArrayCollection;
+            import spark.events.IndexChangeEvent;
+
+            public function setListDataProvider(dataProvider:ArrayCollection):void
+            {
+                someViewList.dataProvider=dataProvider;
+            }
+
+            protected function someViewList_changeHandler(event:IndexChangeEvent):void
+            {
+                dispatchEvent(new SomeViewListEvent(SomeViewListEvent.LIST_INDEX_CHANGED, event.currentTarget.selectedItem.someid));
+            }
+        ]]>
+    </fx:Script>
+    <s:List id="someViewList"
+            x="10"
+            y="18"
+            width="228"
+            labelField="somename"
+            change="someViewList_changeHandler(event)"/>
+</s:View>

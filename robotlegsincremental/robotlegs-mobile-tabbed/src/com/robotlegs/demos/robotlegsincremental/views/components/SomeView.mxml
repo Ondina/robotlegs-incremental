@@ -3,9 +3,6 @@
         xmlns:s="library://ns.adobe.com/flex/spark"
         title="SomeView"
         name="SomeView">
-    <fx:Declarations>
-        <!-- Place non-visual elements (e.g., services, value objects) here -->
-    </fx:Declarations>
     <fx:Script>
         <![CDATA[
             import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
@@ -15,13 +12,11 @@
             public function setListDataProvider(dataProvider:ArrayCollection):void
             {
                 someViewList.dataProvider=dataProvider;
-                trace("[Flex] SomeView.setListDataProvider(dataProvider) <<<<<<<<<<<<<<<<< ");
             }
 
             protected function someViewList_changeHandler(event:IndexChangeEvent):void
             {
-                trace("[Flex] SomeView.someViewList_changeHandler(event) " + event.currentTarget.selectedItem.someid);
-                dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, event.currentTarget.selectedItem.someid));
+                 dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, event.currentTarget.selectedItem.someid));
             }
         ]]>
     </fx:Script>

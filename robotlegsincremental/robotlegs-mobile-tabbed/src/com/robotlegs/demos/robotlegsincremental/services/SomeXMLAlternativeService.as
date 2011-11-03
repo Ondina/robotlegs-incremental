@@ -36,8 +36,7 @@ package com.robotlegs.demos.robotlegsincremental.services
 
         protected function onDataReceived(xml:XML):void
         {
-            trace("[Impl] [Service] SomeXMLAlternativeService.onDataReceived(someServiceResult:Array)");
-            var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(xml);
+             var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(xml);
             dispatch(new SomeServiceResultEvent(SomeServiceResultEvent.DATA_RECEIVED, someParsedResult));
         }
     }

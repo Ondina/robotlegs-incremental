@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--SomeXML-->
+<somexml>
+  <someitem>
+  <somename>SomeView</somename>
+  <someid>0</someid>
+  </someitem>
+  <someitem>
+  <somename>AnotherView</somename>
+  <someid>1</someid>
+  </someitem>
+  <someitem>
+  <somename>OtherView</somename>
+  <someid>2</someid>
+  </someitem>
+</somexml>

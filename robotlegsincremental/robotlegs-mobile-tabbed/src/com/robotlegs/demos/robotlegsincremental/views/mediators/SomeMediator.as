@@ -14,18 +14,11 @@ package com.robotlegs.demos.robotlegsincremental.views.mediators
     public class SomeMediator extends Mediator
     {
 
-        public function SomeMediator():void
-        {
-            trace("[Impl] [Mediator] Constructor SomeMediator()");
-            super();
-        }
-
         [Inject]
         public var view:SomeView;
 
         override public function onRegister():void
         {
-            trace("[Impl] [Mediator] SomeMediator.onRegister() <<<<<<<<<<<<<<<<<");
             eventMap.mapListener(eventDispatcher, SomeModelEvent.DATA_UPDATED, onDataUpdated);
             eventMap.mapListener(view, SomeViewStackEvent.STACK_INDEX_CHANGED, dispatch);
             serverRequest();
@@ -33,13 +26,11 @@ package com.robotlegs.demos.robotlegsincremental.views.mediators
 
         protected function serverRequest():void
         {
-            trace("SomeMediator.serverRequest()");
-            dispatch(new SomeServiceRequestEvent(SomeServiceRequestEvent.DATA_REQUESTED));
+             dispatch(new SomeServiceRequestEvent(SomeServiceRequestEvent.DATA_REQUESTED));
         }
 
         protected function onDataUpdated(event:SomeModelEvent):void
         {
-            trace("[Impl] [Mediator] SomeMediator.onDataUpdated(event:SomeModelEvent)<<<<<<<<<<<<<<<<<");
             view.setListDataProvider(event.someUpdatedData);
         }
     }
