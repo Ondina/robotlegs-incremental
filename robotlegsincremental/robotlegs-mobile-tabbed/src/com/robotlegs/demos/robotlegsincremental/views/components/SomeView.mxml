@@ -5,25 +5,43 @@
         name="SomeView">
     <fx:Script>
         <![CDATA[
-            import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
-            import mx.collections.ArrayCollection;
-            import spark.events.IndexChangeEvent;
-
+			import com.robotlegs.demos.robotlegsincremental.controllers.events.SomePopUpEvent;
+			import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
+			
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.IndexChangeEvent;
+			
             public function setListDataProvider(dataProvider:ArrayCollection):void
             {
                 someViewList.dataProvider=dataProvider;
             }
-
+			
+			public function setDataFromPopUp(value:String):void
+			{
+				calloutData.text=value;
+			}
+			
             protected function someViewList_changeHandler(event:IndexChangeEvent):void
             {
                  dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, event.currentTarget.selectedItem.someid));
             }
-        ]]>
+						
+			protected function calloutButton_clickHandler(event:MouseEvent):void
+			{
+				dispatchEvent(new SomePopUpEvent(SomePopUpEvent.OPEN_POPUP, event.currentTarget as DisplayObjectContainer));				
+			}
+		]]>
     </fx:Script>
-    <s:List id="someViewList"
-            x="10"
-            y="18"
-            width="228"
-            labelField="somename"
-            change="someViewList_changeHandler(event)"/>
+	
+	<s:VGroup  x="10" y="31" paddingTop="10" paddingLeft="5" paddingRight="10">
+		<s:List id="someViewList" changing="someViewList_changeHandler(event)"
+				labelField="somename" />
+		<s:Label x="10" y="412" text="data from callout"/>
+		<s:TextInput id="calloutData"/>
+	</s:VGroup>
+
+	<s:Button id="calloutButton" x="379" y="29" label="Open Callout container"
+			  click="calloutButton_clickHandler(event)"/>
+	
 </s:View>

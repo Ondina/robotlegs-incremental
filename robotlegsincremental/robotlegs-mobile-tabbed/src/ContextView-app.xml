@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/3.0">
+<application xmlns="http://ns.adobe.com/air/application/3.1">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
@@ -15,7 +15,7 @@
 
 	<!-- A universally unique application identifier. Must be unique across all AIR applications.
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-	<id>Main</id>
+	<id>RobotlegsMobileTabbed</id>
 
 	<!-- Used as the filename for the application. Required. -->
 	<filename>ContextView</filename>
@@ -216,11 +216,12 @@
 		]]>
         </manifestAdditions> -->
 	    <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
-        <!-- <colorDepth></colorDepth> -->
+       
     <!-- </android> -->
 	<!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
 
 <android>
+ <colorDepth>16bit</colorDepth>
         <manifestAdditions><![CDATA[
 			<manifest android:installLocation="auto">
 			    <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->

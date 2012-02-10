@@ -20,13 +20,14 @@ package com.robotlegs.demos.robotlegsincremental.views.mediators
 
         override public function onRegister():void
         {
+			trace("AnotherMediator.onRegister()");
             eventMap.mapListener(eventDispatcher, SomeModelEvent.DATA_UPDATED, onDataUpdated);
             serverRequest();
         }
 
         protected function serverRequest():void
         {
-            dispatch(new SomeAlternativeServiceRequestEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED,''));
+            dispatch(new SomeAlternativeServiceRequestEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED));
         }
 
         protected function onDataUpdated(event:SomeModelEvent):void

@@ -12,7 +12,7 @@ package com.robotlegs.demos.robotlegsincremental.controllers.events
         public static const ALTERNATIVE_DATA_REQUESTED:String="alternativeDataRequested";
         public static const DATA_ERROR:String="dataError";
 
-        public function SomeAlternativeServiceRequestEvent(type:String, someServiceError:String, bubbles:Boolean=false, cancelable:Boolean=false)
+        public function SomeAlternativeServiceRequestEvent(type:String, someServiceError:String="", bubbles:Boolean=false, cancelable:Boolean=false)
         {
             _someServiceError=someServiceError;
             super(type, bubbles, cancelable);

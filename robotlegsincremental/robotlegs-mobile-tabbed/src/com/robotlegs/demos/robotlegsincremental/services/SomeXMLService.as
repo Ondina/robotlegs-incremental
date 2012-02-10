@@ -52,6 +52,7 @@ package com.robotlegs.demos.robotlegsincremental.services
         protected function onDataReceived(event:Event):void
         {
 			unregisterListeners();
+			
 			var someParsedResult:ArrayCollection=_parser.resultsAsArrayCollection(event.target.data);
 			dispatch(new SomeServiceResultEvent(SomeServiceResultEvent.DATA_RECEIVED, someParsedResult));
         }
@@ -76,8 +77,9 @@ package com.robotlegs.demos.robotlegsincremental.services
 			unregisterListeners();
 			urlLoader.close();			
 			urlLoader=null;
-			dispatch(new SomeAlternativeServiceRequestEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED, ""));
+			dispatch(new SomeAlternativeServiceRequestEvent(SomeAlternativeServiceRequestEvent.ALTERNATIVE_DATA_REQUESTED));
 		}
+		
 		protected function registerListeners():void
 		{
 			urlLoader.addEventListener(Event.COMPLETE, onDataReceived);
