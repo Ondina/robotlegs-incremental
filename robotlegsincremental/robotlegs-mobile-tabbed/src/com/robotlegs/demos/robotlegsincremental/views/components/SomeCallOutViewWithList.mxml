@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Callout xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" xmlns:components="com.robotlegs.demos.robotlegsincremental.views.components.*">
+	<fx:Script>
+		<![CDATA[
+			import com.robotlegs.demos.robotlegsincremental.controllers.events.SomePopUpEvent;
+			
+			import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
+			
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.IndexChangeEvent;
+			
+			public function onPopUpOpened(value:String):void
+			{
+				firstName.text=value;
+			}
+			
+			protected function onClosePopUp(event:MouseEvent):void
+			{
+				if(event.currentTarget.id=="okButton")
+					dispatchEvent(new SomePopUpEvent(SomePopUpEvent.CLOSE_POPUP, null, lastName.text));
+				this.close();
+			}
+			
+			public function setListDataProvider(dataProvider:ArrayCollection):void
+			{
+				someViewList.dataProvider=dataProvider;
+			}
+			
+			protected function someViewList_changeHandler(event:IndexChangeEvent):void
+			{
+				lastName.text=event.currentTarget.selectedItem.somename;
+				//dispatchEvent(new SomeViewStackEvent(SomeViewStackEvent.STACK_INDEX_CHANGED, event.currentTarget.selectedItem.someid));
+			}									
+		]]>
+	</fx:Script>
+	
+	<s:VGroup
+		paddingTop="10" paddingLeft="5" paddingRight="10">
+		<s:List id="someViewList"
+				x="10"
+				y="18"
+				width="228"
+				labelField="somename"
+				change="someViewList_changeHandler(event)"/>
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="First Name: " 
+					 fontWeight="bold"/>
+			<s:TextInput id="firstName" width="225"/>
+		</s:HGroup>
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="Last Name: " 
+					 fontWeight="bold"/>
+			<s:TextInput id="lastName" width="225"/>
+		</s:HGroup>
+		<s:HGroup>
+			<s:Button id="okButton" label="OK" click="onClosePopUp(event);"/>
+			<s:Button id="cancelButton" label="Cancel" click="onClosePopUp(event);"/>
+		</s:HGroup>		
+	</s:VGroup>	
+</s:Callout>
