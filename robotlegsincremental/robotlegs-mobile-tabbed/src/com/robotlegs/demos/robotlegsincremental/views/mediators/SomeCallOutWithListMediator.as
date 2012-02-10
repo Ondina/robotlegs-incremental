@@ -4,12 +4,7 @@ package com.robotlegs.demos.robotlegsincremental.views.mediators
     import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeServiceRequestEvent;
     import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
     import com.robotlegs.demos.robotlegsincremental.models.events.SomeModelEvent;
-    import com.robotlegs.demos.robotlegsincremental.views.components.ListView;
     import com.robotlegs.demos.robotlegsincremental.views.components.SomeCallOutViewWithList;
-    
-    import flash.display.DisplayObjectContainer;
-    
-    import mx.events.FlexEvent;
     
     import org.robotlegs.mvcs.Mediator;
 

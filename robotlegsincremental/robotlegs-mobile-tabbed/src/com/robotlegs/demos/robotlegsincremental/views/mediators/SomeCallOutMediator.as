@@ -1,17 +1,8 @@
 package com.robotlegs.demos.robotlegsincremental.views.mediators
 {
     import com.robotlegs.demos.robotlegsincremental.controllers.events.SomePopUpEvent;
-    import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeServiceRequestEvent;
     import com.robotlegs.demos.robotlegsincremental.controllers.events.SomeViewStackEvent;
-    import com.robotlegs.demos.robotlegsincremental.models.events.SomeModelEvent;
-    import com.robotlegs.demos.robotlegsincremental.views.components.AnotherView;
-    import com.robotlegs.demos.robotlegsincremental.views.components.ListView;
     import com.robotlegs.demos.robotlegsincremental.views.components.SomeCallOutView;
-    
-    import flash.display.DisplayObjectContainer;
-    import flash.events.Event;
-    
-    import mx.events.FlexEvent;
     
     import org.robotlegs.mvcs.Mediator;
 
@@ -33,12 +24,7 @@ package com.robotlegs.demos.robotlegsincremental.views.mediators
  			view.onPopUpOpened("text from SomeCallOutMediator onregister()");
 			//this.mediatorMap.createMediator(view.listView );				
         }
-		protected function createListMediator(event:FlexEvent):void
-		{
-			trace("SomeCallOutMediator.createListMediator");
-			this.mediatorMap.createMediator(ListView as DisplayObjectContainer);	
-		}
-						
+								
 		protected function onClosePopup(event:SomePopUpEvent):void
 		{
 			dispatch(new SomePopUpEvent(SomePopUpEvent.POPUP_DATA_CHANGED, null, event.popUpData));
